@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.zora.superpoint.repository.mapper.PointMapper">
+  <resultMap id="BaseResultMap" type="cn.zora.superpoint.model.superpoint.Point">
+    <!--@mbg.generated-->
+    <!--@Table point-->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="facility_id" jdbcType="INTEGER" property="facilityId" />
+    <result column="match_id" jdbcType="INTEGER" property="matchId" />
+    <result column="point_type" jdbcType="OTHER" property="pointType" />
+    <result column="lane" jdbcType="VARCHAR" property="lane" />
+    <result column="geo_point" jdbcType="INTEGER" property="geoPoint" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, `name`, facility_id, match_id, point_type, lane, geo_point, create_time
+  </sql>
+  <update id="updateBatch" parameterType="java.util.List">
+    <!--@mbg.generated-->
+    update point
+    <trim prefix="set" suffixOverrides=",">
+      <trim prefix="`name` = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=INTEGER} then #{item.name,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+      <trim prefix="facility_id = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=INTEGER} then #{item.facilityId,jdbcType=INTEGER}
+        </foreach>
+      </trim>
+      <trim prefix="match_id = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=INTEGER} then #{item.matchId,jdbcType=INTEGER}
+        </foreach>
+      </trim>
+      <trim prefix="point_type = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=INTEGER} then #{item.pointType,jdbcType=OTHER}
+        </foreach>
+      </trim>
+      <trim prefix="lane = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=INTEGER} then #{item.lane,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+      <trim prefix="geo_point = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=INTEGER} then #{item.geoPoint,jdbcType=INTEGER}
+        </foreach>
+      </trim>
+      <trim prefix="create_time = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=INTEGER} then #{item.createTime,jdbcType=TIMESTAMP}
+        </foreach>
+      </trim>
+    </trim>
+    where id in
+    <foreach close=")" collection="list" item="item" open="(" separator=", ">
+      #{item.id,jdbcType=INTEGER}
+    </foreach>
+  </update>
+  <insert id="batchInsert" keyColumn="id" keyProperty="id" parameterType="map" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into point
+    (`name`, facility_id, match_id, point_type, lane, geo_point, create_time)
+    values
+    <foreach collection="list" item="item" separator=",">
+      (#{item.name,jdbcType=VARCHAR}, #{item.facilityId,jdbcType=INTEGER}, #{item.matchId,jdbcType=INTEGER}, 
+        #{item.pointType,jdbcType=OTHER}, #{item.lane,jdbcType=VARCHAR}, #{item.geoPoint,jdbcType=INTEGER}, 
+        #{item.createTime,jdbcType=TIMESTAMP})
+    </foreach>
+  </insert>
+  <insert id="insertOrUpdate" keyColumn="id" keyProperty="id" parameterType="cn.zora.superpoint.model.superpoint.Point" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into point
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      `name`,
+      facility_id,
+      match_id,
+      point_type,
+      lane,
+      geo_point,
+      create_time,
+    </trim>
+    values
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      #{name,jdbcType=VARCHAR},
+      #{facilityId,jdbcType=INTEGER},
+      #{matchId,jdbcType=INTEGER},
+      #{pointType,jdbcType=OTHER},
+      #{lane,jdbcType=VARCHAR},
+      #{geoPoint,jdbcType=INTEGER},
+      #{createTime,jdbcType=TIMESTAMP},
+    </trim>
+    on duplicate key update 
+    <trim suffixOverrides=",">
+      <if test="id != null">
+        id = #{id,jdbcType=INTEGER},
+      </if>
+      `name` = #{name,jdbcType=VARCHAR},
+      facility_id = #{facilityId,jdbcType=INTEGER},
+      match_id = #{matchId,jdbcType=INTEGER},
+      point_type = #{pointType,jdbcType=OTHER},
+      lane = #{lane,jdbcType=VARCHAR},
+      geo_point = #{geoPoint,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+    </trim>
+  </insert>
+  <insert id="insertOrUpdateSelective" keyColumn="id" keyProperty="id" parameterType="cn.zora.superpoint.model.superpoint.Point" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into point
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="name != null">
+        `name`,
+      </if>
+      <if test="facilityId != null">
+        facility_id,
+      </if>
+      <if test="matchId != null">
+        match_id,
+      </if>
+      <if test="pointType != null">
+        point_type,
+      </if>
+      <if test="lane != null">
+        lane,
+      </if>
+      <if test="geoPoint != null">
+        geo_point,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    values
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="facilityId != null">
+        #{facilityId,jdbcType=INTEGER},
+      </if>
+      <if test="matchId != null">
+        #{matchId,jdbcType=INTEGER},
+      </if>
+      <if test="pointType != null">
+        #{pointType,jdbcType=OTHER},
+      </if>
+      <if test="lane != null">
+        #{lane,jdbcType=VARCHAR},
+      </if>
+      <if test="geoPoint != null">
+        #{geoPoint,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+    on duplicate key update 
+    <trim suffixOverrides=",">
+      <if test="id != null">
+        id = #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        `name` = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="facilityId != null">
+        facility_id = #{facilityId,jdbcType=INTEGER},
+      </if>
+      <if test="matchId != null">
+        match_id = #{matchId,jdbcType=INTEGER},
+      </if>
+      <if test="pointType != null">
+        point_type = #{pointType,jdbcType=OTHER},
+      </if>
+      <if test="lane != null">
+        lane = #{lane,jdbcType=VARCHAR},
+      </if>
+      <if test="geoPoint != null">
+        geo_point = #{geoPoint,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+</mapper>
