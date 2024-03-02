@@ -1,5 +1,6 @@
 package cn.zora.superpoint.service;
 
+import cn.zora.superpoint.common.ParamUtils;
 import cn.zora.superpoint.common.RuleUtils;
 import cn.zora.superpoint.handler.CommandHandlerFactory;
 import cn.zora.superpoint.model.wechat.ReceiveMessage;
@@ -20,8 +21,11 @@ public class SuperPointService {
     private CommandHandlerFactory commandHandlerFactory;
 
     public ResponseMessage handleTextMessage(ReceiveMessage request) {
-        String rule = RuleUtils.getRule(request.getContent());
-        return commandHandlerFactory.getInstance(rule).runCommand(request);
+        request.setCommand(RuleUtils.getRule(request.getContent()));
+        request.setArgs(ParamUtils.getArgs(request.getContent()));
+        return commandHandlerFactory
+                .getInstance(request.getCommand())
+                .runCommand(request);
     }
 
 }

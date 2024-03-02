@@ -1,7 +1,7 @@
 package cn.zora.superpoint.service;
 
 import cn.zora.superpoint.common.PlatformTypeEnum;
-import cn.zora.superpoint.model.Log;
+import cn.zora.superpoint.model.superpoint.Log;
 import cn.zora.superpoint.model.wechat.ReceiveMessage;
 import cn.zora.superpoint.model.wechat.ResponseMessage;
 import cn.zora.superpoint.repository.mapper.LogMapper;

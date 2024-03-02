@@ -1,4 +1,4 @@
-package cn.zora.superpoint.model;
+package cn.zora.superpoint.model.superpoint;
 
 import cn.zora.superpoint.common.PlatformTypeEnum;
 import com.baomidou.mybatisplus.annotation.IdType;

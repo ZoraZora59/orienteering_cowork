@@ -1,5 +1,7 @@
 package cn.zora.superpoint.model.wechat;
 
+import cn.zora.superpoint.model.superpoint.Player;
+import cn.zora.superpoint.service.PlayerService;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import lombok.AllArgsConstructor;
@@ -35,7 +37,14 @@ public class ReceiveMessage {
     private String idx;
 
 
+    @Deprecated
     private String nickName;
+
+    private String command;
+
+    private String[] args;
+
+    private Player user;
 }
 //<xml>
 //  <ToUserName><![CDATA[toUser]]></ToUserName>

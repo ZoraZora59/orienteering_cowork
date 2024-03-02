@@ -14,14 +14,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class DegradeCommandHandler extends AbstractCommandHandler{
     @Override
-    public ResponseMessage handleCommand(ReceiveMessage message) {
-        ResponseMessage responseMessage = new ResponseMessage();
-        responseMessage.setContent("你好我正在维护这套系统，预计在3月5日前将不能提供服务，很抱歉，敬请谅解🙏");
-        responseMessage.setCreateTime(System.currentTimeMillis());
-        responseMessage.setFromUserName(message.getToUserName());
-        responseMessage.setToUserName(message.getFromUserName());
-        responseMessage.setMsgType("text");
-        return responseMessage;
+    public String handleCommand(ReceiveMessage message) {
+       return "你好，我正在维护这套系统，预计在3月5日前将不能提供服务，很抱歉，敬请谅解🙏";
+
     }
 
     /**

@@ -1,6 +1,6 @@
 package cn.zora.superpoint.repository.mapper;
 
-import cn.zora.superpoint.model.Log;
+import cn.zora.superpoint.model.superpoint.Log;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 import java.util.List;
