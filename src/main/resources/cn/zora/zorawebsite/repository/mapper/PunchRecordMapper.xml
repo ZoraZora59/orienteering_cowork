@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.zora.zorawebsite.repository.mapper.PunchRecordMapper">
+  <resultMap id="BaseResultMap" type="cn.zora.zorawebsite.model.superpoint.PunchRecord">
+    <!--@mbg.generated-->
+    <!--@Table punch_record-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="player_id" jdbcType="INTEGER" property="playerId" />
+    <result column="point_id" jdbcType="INTEGER" property="pointId" />
+    <result column="match_id" jdbcType="INTEGER" property="matchId" />
+    <result column="team_id" jdbcType="INTEGER" property="teamId" />
+    <result column="facility_id" jdbcType="INTEGER" property="facilityId" />
+    <result column="expect_serial" jdbcType="INTEGER" property="expectSerial" />
+    <result column="punched" jdbcType="OTHER" property="punched" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="punch_time" jdbcType="TIMESTAMP" property="punchTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, player_id, point_id, match_id, team_id, facility_id, expect_serial, punched, 
+    create_time, punch_time
+  </sql>
+  <update id="updateBatch" parameterType="java.util.List">
+    <!--@mbg.generated-->
+    update punch_record
+    <trim prefix="set" suffixOverrides=",">
+      <trim prefix="player_id = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=BIGINT} then #{item.playerId,jdbcType=INTEGER}
+        </foreach>
+      </trim>
+      <trim prefix="point_id = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=BIGINT} then #{item.pointId,jdbcType=INTEGER}
+        </foreach>
+      </trim>
+      <trim prefix="match_id = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=BIGINT} then #{item.matchId,jdbcType=INTEGER}
+        </foreach>
+      </trim>
+      <trim prefix="team_id = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=BIGINT} then #{item.teamId,jdbcType=INTEGER}
+        </foreach>
+      </trim>
+      <trim prefix="facility_id = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=BIGINT} then #{item.facilityId,jdbcType=INTEGER}
+        </foreach>
+      </trim>
+      <trim prefix="expect_serial = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=BIGINT} then #{item.expectSerial,jdbcType=INTEGER}
+        </foreach>
+      </trim>
+      <trim prefix="punched = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=BIGINT} then #{item.punched,jdbcType=OTHER}
+        </foreach>
+      </trim>
+      <trim prefix="create_time = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=BIGINT} then #{item.createTime,jdbcType=TIMESTAMP}
+        </foreach>
+      </trim>
+      <trim prefix="punch_time = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=BIGINT} then #{item.punchTime,jdbcType=TIMESTAMP}
+        </foreach>
+      </trim>
+    </trim>
+    where id in
+    <foreach close=")" collection="list" item="item" open="(" separator=", ">
+      #{item.id,jdbcType=BIGINT}
+    </foreach>
+  </update>
+  <insert id="batchInsert" keyColumn="id" keyProperty="id" parameterType="map" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into punch_record
+    (player_id, point_id, match_id, team_id, facility_id, expect_serial, punched, create_time, 
+      punch_time)
+    values
+    <foreach collection="list" item="item" separator=",">
+      (#{item.playerId,jdbcType=INTEGER}, #{item.pointId,jdbcType=INTEGER}, #{item.matchId,jdbcType=INTEGER}, 
+        #{item.teamId,jdbcType=INTEGER}, #{item.facilityId,jdbcType=INTEGER}, #{item.expectSerial,jdbcType=INTEGER}, 
+        #{item.punched,jdbcType=OTHER}, #{item.createTime,jdbcType=TIMESTAMP}, #{item.punchTime,jdbcType=TIMESTAMP}
+        )
+    </foreach>
+  </insert>
+  <insert id="insertOrUpdate" keyColumn="id" keyProperty="id" parameterType="cn.zora.zorawebsite.model.superpoint.PunchRecord" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into punch_record
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      player_id,
+      point_id,
+      match_id,
+      team_id,
+      facility_id,
+      expect_serial,
+      punched,
+      create_time,
+      punch_time,
+    </trim>
+    values
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      #{playerId,jdbcType=INTEGER},
+      #{pointId,jdbcType=INTEGER},
+      #{matchId,jdbcType=INTEGER},
+      #{teamId,jdbcType=INTEGER},
+      #{facilityId,jdbcType=INTEGER},
+      #{expectSerial,jdbcType=INTEGER},
+      #{punched,jdbcType=OTHER},
+      #{createTime,jdbcType=TIMESTAMP},
+      #{punchTime,jdbcType=TIMESTAMP},
+    </trim>
+    on duplicate key update 
+    <trim suffixOverrides=",">
+      <if test="id != null">
+        id = #{id,jdbcType=BIGINT},
+      </if>
+      player_id = #{playerId,jdbcType=INTEGER},
+      point_id = #{pointId,jdbcType=INTEGER},
+      match_id = #{matchId,jdbcType=INTEGER},
+      team_id = #{teamId,jdbcType=INTEGER},
+      facility_id = #{facilityId,jdbcType=INTEGER},
+      expect_serial = #{expectSerial,jdbcType=INTEGER},
+      punched = #{punched,jdbcType=OTHER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      punch_time = #{punchTime,jdbcType=TIMESTAMP},
+    </trim>
+  </insert>
+  <insert id="insertOrUpdateSelective" keyColumn="id" keyProperty="id" parameterType="cn.zora.zorawebsite.model.superpoint.PunchRecord" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into punch_record
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="playerId != null">
+        player_id,
+      </if>
+      <if test="pointId != null">
+        point_id,
+      </if>
+      <if test="matchId != null">
+        match_id,
+      </if>
+      <if test="teamId != null">
+        team_id,
+      </if>
+      <if test="facilityId != null">
+        facility_id,
+      </if>
+      <if test="expectSerial != null">
+        expect_serial,
+      </if>
+      <if test="punched != null">
+        punched,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="punchTime != null">
+        punch_time,
+      </if>
+    </trim>
+    values
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="playerId != null">
+        #{playerId,jdbcType=INTEGER},
+      </if>
+      <if test="pointId != null">
+        #{pointId,jdbcType=INTEGER},
+      </if>
+      <if test="matchId != null">
+        #{matchId,jdbcType=INTEGER},
+      </if>
+      <if test="teamId != null">
+        #{teamId,jdbcType=INTEGER},
+      </if>
+      <if test="facilityId != null">
+        #{facilityId,jdbcType=INTEGER},
+      </if>
+      <if test="expectSerial != null">
+        #{expectSerial,jdbcType=INTEGER},
+      </if>
+      <if test="punched != null">
+        #{punched,jdbcType=OTHER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="punchTime != null">
+        #{punchTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+    on duplicate key update 
+    <trim suffixOverrides=",">
+      <if test="id != null">
+        id = #{id,jdbcType=BIGINT},
+      </if>
+      <if test="playerId != null">
+        player_id = #{playerId,jdbcType=INTEGER},
+      </if>
+      <if test="pointId != null">
+        point_id = #{pointId,jdbcType=INTEGER},
+      </if>
+      <if test="matchId != null">
+        match_id = #{matchId,jdbcType=INTEGER},
+      </if>
+      <if test="teamId != null">
+        team_id = #{teamId,jdbcType=INTEGER},
+      </if>
+      <if test="facilityId != null">
+        facility_id = #{facilityId,jdbcType=INTEGER},
+      </if>
+      <if test="expectSerial != null">
+        expect_serial = #{expectSerial,jdbcType=INTEGER},
+      </if>
+      <if test="punched != null">
+        punched = #{punched,jdbcType=OTHER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="punchTime != null">
+        punch_time = #{punchTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+</mapper>
