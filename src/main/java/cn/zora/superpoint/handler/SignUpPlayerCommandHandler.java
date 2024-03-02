@@ -44,11 +44,12 @@ public class SignUpPlayerCommandHandler extends AbstractCommandHandler{
         player.setNickName(message.getArgs()[0]);
         player.setGender(message.getArgs().length > 1 ? GenderTypeEnum.valueOf(message.getArgs()[1]) : GenderTypeEnum.UNKNOWN);
         player.setPhoneNumber(message.getArgs().length > 2 ? message.getArgs()[2] : null);
-        int rows = playerService.registerPlayer(player);
-        if(rows > 0){
+        player.setIdCardNumber(message.getArgs().length > 2 ? message.getArgs()[2] : null);
+        boolean isNewUser = playerService.registerPlayer(player);
+        if (isNewUser) {
             return "欢迎，" + player.getNickName() + "，注册成功，请开始关联你的团队吧。";
         }
-        return "你已经注册过啦，不用重复注册。";
+        return "你已经注册过啦，这次帮你替换了信息。";
     }
 
     /**
