@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.zora.superpoint.repository.mapper.LogMapper">
+  <resultMap id="BaseResultMap" type="cn.zora.superpoint.model.Log">
+    <!--@mbg.generated-->
+    <!--@Table log-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="user" jdbcType="VARCHAR" property="user" />
+    <result column="platform" jdbcType="OTHER" property="platform" />
+    <result column="receive_message_json" jdbcType="VARCHAR" property="receiveMessageJson" />
+    <result column="response_message_json" jdbcType="VARCHAR" property="responseMessageJson" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, `user`, platform, receive_message_json, response_message_json, create_time
+  </sql>
+  <update id="updateBatch" parameterType="java.util.List">
+    <!--@mbg.generated-->
+    update log
+    <trim prefix="set" suffixOverrides=",">
+      <trim prefix="`user` = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=BIGINT} then #{item.user,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+      <trim prefix="platform = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=BIGINT} then #{item.platform,jdbcType=OTHER}
+        </foreach>
+      </trim>
+      <trim prefix="receive_message_json = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=BIGINT} then #{item.receiveMessageJson,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+      <trim prefix="response_message_json = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=BIGINT} then #{item.responseMessageJson,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+      <trim prefix="create_time = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=BIGINT} then #{item.createTime,jdbcType=TIMESTAMP}
+        </foreach>
+      </trim>
+    </trim>
+    where id in
+    <foreach close=")" collection="list" item="item" open="(" separator=", ">
+      #{item.id,jdbcType=BIGINT}
+    </foreach>
+  </update>
+  <insert id="batchInsert" keyColumn="id" keyProperty="id" parameterType="map" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into log
+    (`user`, platform, receive_message_json, response_message_json, create_time)
+    values
+    <foreach collection="list" item="item" separator=",">
+      (#{item.user,jdbcType=VARCHAR}, #{item.platform,jdbcType=OTHER}, #{item.receiveMessageJson,jdbcType=VARCHAR}, 
+        #{item.responseMessageJson,jdbcType=VARCHAR}, #{item.createTime,jdbcType=TIMESTAMP}
+        )
+    </foreach>
+  </insert>
+  <insert id="insertOrUpdate" keyColumn="id" keyProperty="id" parameterType="cn.zora.superpoint.model.Log" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into log
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      `user`,
+      platform,
+      receive_message_json,
+      response_message_json,
+      create_time,
+    </trim>
+    values
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      #{user,jdbcType=VARCHAR},
+      #{platform,jdbcType=OTHER},
+      #{receiveMessageJson,jdbcType=VARCHAR},
+      #{responseMessageJson,jdbcType=VARCHAR},
+      #{createTime,jdbcType=TIMESTAMP},
+    </trim>
+    on duplicate key update 
+    <trim suffixOverrides=",">
+      <if test="id != null">
+        id = #{id,jdbcType=BIGINT},
+      </if>
+      `user` = #{user,jdbcType=VARCHAR},
+      platform = #{platform,jdbcType=OTHER},
+      receive_message_json = #{receiveMessageJson,jdbcType=VARCHAR},
+      response_message_json = #{responseMessageJson,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+    </trim>
+  </insert>
+  <insert id="insertOrUpdateSelective" keyColumn="id" keyProperty="id" parameterType="cn.zora.superpoint.model.Log" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into log
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="user != null">
+        `user`,
+      </if>
+      <if test="platform != null">
+        platform,
+      </if>
+      <if test="receiveMessageJson != null">
+        receive_message_json,
+      </if>
+      <if test="responseMessageJson != null">
+        response_message_json,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    values
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="user != null">
+        #{user,jdbcType=VARCHAR},
+      </if>
+      <if test="platform != null">
+        #{platform,jdbcType=OTHER},
+      </if>
+      <if test="receiveMessageJson != null">
+        #{receiveMessageJson,jdbcType=VARCHAR},
+      </if>
+      <if test="responseMessageJson != null">
+        #{responseMessageJson,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+    on duplicate key update 
+    <trim suffixOverrides=",">
+      <if test="id != null">
+        id = #{id,jdbcType=BIGINT},
+      </if>
+      <if test="user != null">
+        `user` = #{user,jdbcType=VARCHAR},
+      </if>
+      <if test="platform != null">
+        platform = #{platform,jdbcType=OTHER},
+      </if>
+      <if test="receiveMessageJson != null">
+        receive_message_json = #{receiveMessageJson,jdbcType=VARCHAR},
+      </if>
+      <if test="responseMessageJson != null">
+        response_message_json = #{responseMessageJson,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+</mapper>

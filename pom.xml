@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>cn.zora</groupId>
-    <artifactId>zora-web-site</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-    <name>zora-web-site</name>
-    <description>zora personal website</description>
+    <artifactId>superpoint</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <name>superpoint</name>
+    <description>阿左制作的用于超级定点等比赛团队协作的服务</description>
     <dependencies>
 <!--        <dependency>-->
 <!--            <groupId>org.springframework.boot</groupId>-->
@@ -56,7 +56,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
 
                 <configuration>
-                    <mainClass>cn.zora.zorawebsite.ZoraWebSiteApplication</mainClass>
+                    <mainClass>cn.zora.superpoint.ZoraWebSiteApplication</mainClass>
                     <excludes>
                         <exclude>
                             <groupId>org.projectlombok</groupId>
