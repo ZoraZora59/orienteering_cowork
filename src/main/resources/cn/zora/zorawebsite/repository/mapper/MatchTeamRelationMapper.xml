@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.zora.zorawebsite.repository.mapper.MatchTeamRelationMapper">
+  <resultMap id="BaseResultMap" type="cn.zora.zorawebsite.model.superpoint.MatchTeamRelation">
+    <!--@mbg.generated-->
+    <!--@Table match_team_relation-->
+    <result column="match_id" jdbcType="INTEGER" property="matchId" />
+    <result column="team_id" jdbcType="INTEGER" property="teamId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    match_id, team_id
+  </sql>
+  <insert id="batchInsert" parameterType="map">
+    <!--@mbg.generated-->
+    insert into match_team_relation
+    (match_id, team_id)
+    values
+    <foreach collection="list" item="item" separator=",">
+      (#{item.matchId,jdbcType=INTEGER}, #{item.teamId,jdbcType=INTEGER})
+    </foreach>
+  </insert>
+  <insert id="insertOrUpdate" parameterType="cn.zora.zorawebsite.model.superpoint.MatchTeamRelation">
+    <!--@mbg.generated-->
+    insert into match_team_relation
+    (match_id, team_id)
+    values
+    (#{matchId,jdbcType=INTEGER}, #{teamId,jdbcType=INTEGER})
+    on duplicate key update 
+    match_id = #{matchId,jdbcType=INTEGER}, 
+    team_id = #{teamId,jdbcType=INTEGER}
+  </insert>
+  <insert id="insertOrUpdateSelective" parameterType="cn.zora.zorawebsite.model.superpoint.MatchTeamRelation">
+    <!--@mbg.generated-->
+    insert into match_team_relation
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="matchId != null">
+        match_id,
+      </if>
+      <if test="teamId != null">
+        team_id,
+      </if>
+    </trim>
+    values
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="matchId != null">
+        #{matchId,jdbcType=INTEGER},
+      </if>
+      <if test="teamId != null">
+        #{teamId,jdbcType=INTEGER},
+      </if>
+    </trim>
+    on duplicate key update 
+    <trim suffixOverrides=",">
+      <if test="matchId != null">
+        match_id = #{matchId,jdbcType=INTEGER},
+      </if>
+      <if test="teamId != null">
+        team_id = #{teamId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+</mapper>

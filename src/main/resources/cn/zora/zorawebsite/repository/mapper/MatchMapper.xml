@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.zora.zorawebsite.repository.mapper.MatchMapper">
+  <resultMap id="BaseResultMap" type="cn.zora.zorawebsite.model.superpoint.Match">
+    <!--@mbg.generated-->
+    <!--@Table `match`-->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="apply_start_time" jdbcType="TIMESTAMP" property="applyStartTime" />
+    <result column="apply_end_time" jdbcType="TIMESTAMP" property="applyEndTime" />
+    <result column="match_start_time" jdbcType="TIMESTAMP" property="matchStartTime" />
+    <result column="match_end_time" jdbcType="TIMESTAMP" property="matchEndTime" />
+    <result column="series_name" jdbcType="VARCHAR" property="seriesName" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, `name`, apply_start_time, apply_end_time, match_start_time, match_end_time, series_name, 
+    create_time, update_time
+  </sql>
+  <update id="updateBatch" parameterType="java.util.List">
+    <!--@mbg.generated-->
+    update `match`
+    <trim prefix="set" suffixOverrides=",">
+      <trim prefix="`name` = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=INTEGER} then #{item.name,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+      <trim prefix="apply_start_time = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=INTEGER} then #{item.applyStartTime,jdbcType=TIMESTAMP}
+        </foreach>
+      </trim>
+      <trim prefix="apply_end_time = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=INTEGER} then #{item.applyEndTime,jdbcType=TIMESTAMP}
+        </foreach>
+      </trim>
+      <trim prefix="match_start_time = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=INTEGER} then #{item.matchStartTime,jdbcType=TIMESTAMP}
+        </foreach>
+      </trim>
+      <trim prefix="match_end_time = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=INTEGER} then #{item.matchEndTime,jdbcType=TIMESTAMP}
+        </foreach>
+      </trim>
+      <trim prefix="series_name = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=INTEGER} then #{item.seriesName,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+      <trim prefix="create_time = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=INTEGER} then #{item.createTime,jdbcType=TIMESTAMP}
+        </foreach>
+      </trim>
+      <trim prefix="update_time = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=INTEGER} then #{item.updateTime,jdbcType=TIMESTAMP}
+        </foreach>
+      </trim>
+    </trim>
+    where id in
+    <foreach close=")" collection="list" item="item" open="(" separator=", ">
+      #{item.id,jdbcType=INTEGER}
+    </foreach>
+  </update>
+  <insert id="batchInsert" keyColumn="id" keyProperty="id" parameterType="map" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into `match`
+    (`name`, apply_start_time, apply_end_time, match_start_time, match_end_time, series_name, 
+      create_time, update_time)
+    values
+    <foreach collection="list" item="item" separator=",">
+      (#{item.name,jdbcType=VARCHAR}, #{item.applyStartTime,jdbcType=TIMESTAMP}, #{item.applyEndTime,jdbcType=TIMESTAMP}, 
+        #{item.matchStartTime,jdbcType=TIMESTAMP}, #{item.matchEndTime,jdbcType=TIMESTAMP}, 
+        #{item.seriesName,jdbcType=VARCHAR}, #{item.createTime,jdbcType=TIMESTAMP}, #{item.updateTime,jdbcType=TIMESTAMP}
+        )
+    </foreach>
+  </insert>
+  <insert id="insertOrUpdate" keyColumn="id" keyProperty="id" parameterType="cn.zora.zorawebsite.model.superpoint.Match" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into `match`
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      `name`,
+      apply_start_time,
+      apply_end_time,
+      match_start_time,
+      match_end_time,
+      series_name,
+      create_time,
+      update_time,
+    </trim>
+    values
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      #{name,jdbcType=VARCHAR},
+      #{applyStartTime,jdbcType=TIMESTAMP},
+      #{applyEndTime,jdbcType=TIMESTAMP},
+      #{matchStartTime,jdbcType=TIMESTAMP},
+      #{matchEndTime,jdbcType=TIMESTAMP},
+      #{seriesName,jdbcType=VARCHAR},
+      #{createTime,jdbcType=TIMESTAMP},
+      #{updateTime,jdbcType=TIMESTAMP},
+    </trim>
+    on duplicate key update 
+    <trim suffixOverrides=",">
+      <if test="id != null">
+        id = #{id,jdbcType=INTEGER},
+      </if>
+      `name` = #{name,jdbcType=VARCHAR},
+      apply_start_time = #{applyStartTime,jdbcType=TIMESTAMP},
+      apply_end_time = #{applyEndTime,jdbcType=TIMESTAMP},
+      match_start_time = #{matchStartTime,jdbcType=TIMESTAMP},
+      match_end_time = #{matchEndTime,jdbcType=TIMESTAMP},
+      series_name = #{seriesName,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+    </trim>
+  </insert>
+  <insert id="insertOrUpdateSelective" keyColumn="id" keyProperty="id" parameterType="cn.zora.zorawebsite.model.superpoint.Match" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into `match`
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="name != null">
+        `name`,
+      </if>
+      <if test="applyStartTime != null">
+        apply_start_time,
+      </if>
+      <if test="applyEndTime != null">
+        apply_end_time,
+      </if>
+      <if test="matchStartTime != null">
+        match_start_time,
+      </if>
+      <if test="matchEndTime != null">
+        match_end_time,
+      </if>
+      <if test="seriesName != null">
+        series_name,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    values
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="applyStartTime != null">
+        #{applyStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="applyEndTime != null">
+        #{applyEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="matchStartTime != null">
+        #{matchStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="matchEndTime != null">
+        #{matchEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="seriesName != null">
+        #{seriesName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+    on duplicate key update 
+    <trim suffixOverrides=",">
+      <if test="id != null">
+        id = #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        `name` = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="applyStartTime != null">
+        apply_start_time = #{applyStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="applyEndTime != null">
+        apply_end_time = #{applyEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="matchStartTime != null">
+        match_start_time = #{matchStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="matchEndTime != null">
+        match_end_time = #{matchEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="seriesName != null">
+        series_name = #{seriesName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+</mapper>
