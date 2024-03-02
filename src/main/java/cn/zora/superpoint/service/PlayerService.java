@@ -21,17 +21,14 @@ public class PlayerService {
 
 
     public synchronized boolean registerPlayer(Player player) {
+        boolean isNewUser = true;
         Player currentUser = playerMapper.selectOne(new LambdaQueryWrapper<Player>().eq(Player::getWechatUser, player.getWechatUser()));
         if (currentUser != null) {
-            currentUser.setNickName(player.getNickName());
-            currentUser.setPhoneNumber(player.getPhoneNumber());
-            currentUser.setIdCardNumber(player.getIdCardNumber());
-            currentUser.setGender(player.getGender());
-            int ignore = playerMapper.updateById(currentUser);
-            return false;
+            player.setId(currentUser.getId());
+            isNewUser = false;
         }
         int ignore = playerMapper.insertOrUpdate(player);
-        return true;
+        return isNewUser;
     }
 
     public Player getPlayerByID(String id) {
