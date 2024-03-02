@@ -9,8 +9,6 @@ package cn.zora.superpoint.common;
 @Deprecated
 public class CommandConstants {
     public static final String REBOOT="系统重启";
-    public static final String REGISTER_FACILITY="注册雪场";
-    public static final String REGISTER_TEAM="创建团队";
     public static final String COMMUNICATE="通信";
     public static final String SIGN_UP="报名";
     public static final String CONFIG_NODES="分配点位";
