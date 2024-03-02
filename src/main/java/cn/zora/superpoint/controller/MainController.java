@@ -2,12 +2,16 @@ package cn.zora.superpoint.controller;
 
 import cn.zora.superpoint.common.CommandConstants;
 import cn.zora.superpoint.common.RuleUtils;
-import cn.zora.superpoint.model.wechat.ResponseMessage;
 import cn.zora.superpoint.model.wechat.ReceiveMessage;
+import cn.zora.superpoint.model.wechat.ResponseMessage;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
@@ -22,7 +26,7 @@ import java.util.concurrent.locks.ReentrantLock;
  * @since 2024/03/01
  */
 @Slf4j
-//@Controller
+@Controller
 public class MainController {
 
     //用户：已完成的点位
