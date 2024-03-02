@@ -1,11 +1,19 @@
 package cn.zora.superpoint.common;
 
+import lombok.Getter;
+
 /**
  * BooleanMysqlEnum
  *
  * @author 阿左
  * @since 2024/03/02
  */
+@Getter
 public enum BooleanMysqlEnum {
-    TRUE,FALSE
+    TRUE("true"),FALSE("false");
+    private final String value;
+    BooleanMysqlEnum(String value){
+        this.value=value;
+    }
+
 }

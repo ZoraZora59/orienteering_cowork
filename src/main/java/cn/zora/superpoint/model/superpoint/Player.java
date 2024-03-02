@@ -1,5 +1,6 @@
 package cn.zora.superpoint.model.superpoint;
 
+import cn.zora.superpoint.common.GenderTypeEnum;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -27,7 +28,7 @@ public class Player {
     private String avatar;
 
     @TableField(value = "gender")
-    private Object gender;
+    private GenderTypeEnum gender;
 
     @TableField(value = "phone_number")
     private String phoneNumber;
