@@ -42,13 +42,13 @@ public class SignUpPlayerCommandHandler extends AbstractCommandHandler{
         Player player = new Player();
         player.setWechatUser(message.getFromUserName());
         player.setNickName(message.getArgs()[0]);
-        player.setGender(message.getArgs().length > 1 ? GenderTypeEnum.valueOf(message.getArgs()[1]) : GenderTypeEnum.valueOf("未知"));
+        player.setGender(message.getArgs().length > 1 ? GenderTypeEnum.valueOf(message.getArgs()[1]) : GenderTypeEnum.UNKNOWN);
         player.setPhoneNumber(message.getArgs().length > 2 ? message.getArgs()[2] : null);
         int rows = playerService.registerPlayer(player);
         if(rows > 0){
             return "欢迎，" + player.getNickName() + "，注册成功，请开始关联你的团队吧。";
         }
-        return "注册失败，请留言联系我人工解决";
+        return "你已经注册过啦，不用重复注册。";
     }
 
     /**

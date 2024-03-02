@@ -19,7 +19,12 @@ public class PlayerService {
     @Resource
     private PlayerMapper playerMapper;
 
-    public int registerPlayer(Player player) {
+
+    public synchronized int registerPlayer(Player player) {
+        Long count = playerMapper.selectCount(new LambdaQueryWrapper<Player>().eq(Player::getWechatUser, player.getWechatUser()));
+        if (count != 0) {
+            return 0;
+        }
         return playerMapper.insert(player);
     }
 
@@ -28,7 +33,7 @@ public class PlayerService {
     }
 
     public Player getPlayerByWechat(String wechatId) {
-        return playerMapper.selectById(new LambdaQueryWrapper<Player>().eq(Player::getWechatUser, wechatId));
+        return playerMapper.selectOne(new LambdaQueryWrapper<Player>().eq(Player::getWechatUser, wechatId));
     }
 
     public List<Player> getPlayersByNickName(String nickName) {
