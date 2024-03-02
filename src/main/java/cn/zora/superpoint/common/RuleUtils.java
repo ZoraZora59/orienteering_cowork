@@ -9,6 +9,10 @@ package cn.zora.superpoint.common;
 public final class RuleUtils {
 
     public static String getRule(String content) {
+        if(content==null||content.isEmpty()){
+            return Constants.COMMUNICATE;
+        }
+
         if (content.startsWith(Constants.REBOOT)) {
             return Constants.REBOOT;
         }
