@@ -1,6 +1,6 @@
 package cn.zora.superpoint.handler;
 
-import cn.zora.superpoint.common.Constants;
+import cn.zora.superpoint.common.CommandEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
@@ -21,6 +21,7 @@ public class CommandHandlerFactory {
     public void injectFields(ApplicationContext applicationContext) {
         this.applicationContext = applicationContext;
     }
+
     private Map<String, ICommandHandler> map;
 
     private ApplicationContext applicationContext;
@@ -30,13 +31,13 @@ public class CommandHandlerFactory {
         Map<String, ICommandHandler> beans = applicationContext.getBeansOfType(ICommandHandler.class);
         map = new HashMap<>(beans.size());
         for (ICommandHandler handle : beans.values()) {
-            map.put(handle.respondCommand(), handle);
+            map.put(handle.respondCommandString(), handle);
         }
     }
 
     public ICommandHandler getInstance(String type) {
-        if(!map.containsKey(type)){
-            return map.get(Constants.COMMUNICATE);
+        if (!map.containsKey(type)) {
+            return map.get(CommandEnum.COMMUNICATE.getValue());
         }
         return map.get(type);
     }

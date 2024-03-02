@@ -1,9 +1,8 @@
 package cn.zora.superpoint.handler;
 
-import cn.zora.superpoint.common.Constants;
+import cn.zora.superpoint.common.CommandEnum;
 import cn.zora.superpoint.model.superpoint.Facility;
 import cn.zora.superpoint.model.wechat.ReceiveMessage;
-import cn.zora.superpoint.model.wechat.ResponseMessage;
 import cn.zora.superpoint.repository.mapper.FacilityMapper;
 import org.springframework.stereotype.Component;
 
@@ -43,7 +42,7 @@ public class RegisterFacilityCommandHandler extends AbstractCommandHandler{
      * @return 命令全写
      */
     @Override
-    public String respondCommand() {
-        return Constants.REGISTER_FACILITY;
+    public CommandEnum respondCommand() {
+        return CommandEnum.REGISTER_FACILITY;
     }
 }

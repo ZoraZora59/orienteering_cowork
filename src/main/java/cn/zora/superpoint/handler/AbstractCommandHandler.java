@@ -1,5 +1,6 @@
 package cn.zora.superpoint.handler;
 
+import cn.zora.superpoint.common.CommandEnum;
 import cn.zora.superpoint.model.wechat.ReceiveMessage;
 import cn.zora.superpoint.model.wechat.ResponseMessage;
 import lombok.extern.slf4j.Slf4j;
@@ -16,10 +17,10 @@ public abstract class AbstractCommandHandler implements ICommandHandler {
     public ResponseMessage runCommand(ReceiveMessage message) {
         String responseContent;
         try {
-            log.info("执行命令: {}", respondCommand());
+            log.info("执行命令: {}", respondCommandString());
             long start = System.currentTimeMillis();
             responseContent = handleCommand(message);
-            log.info("执行命令成功: {}，耗时: {}ms", respondCommand(), System.currentTimeMillis() - start);
+            log.info("执行命令成功: {}，耗时: {}ms", respondCommandString(), System.currentTimeMillis() - start);
         } catch (Exception e) {
             log.error("执行命令失败", e);
             ResponseMessage msg = new ResponseMessage();
@@ -43,6 +44,16 @@ public abstract class AbstractCommandHandler implements ICommandHandler {
      *
      * @return 命令全写
      */
-    public abstract String respondCommand();
+    public String respondCommandString(){
+        return respondCommand().getValue();
+    }
+
+    /**
+     * CommandHandler对应响应的命令枚举
+     *
+     * @return 命令全写
+     */
+    public abstract CommandEnum respondCommand();
+
 
 }

@@ -1,5 +1,6 @@
 package cn.zora.superpoint.handler;
 
+import cn.zora.superpoint.common.CommandEnum;
 import cn.zora.superpoint.model.wechat.ReceiveMessage;
 import cn.zora.superpoint.model.wechat.ResponseMessage;
 
@@ -24,7 +25,14 @@ public interface ICommandHandler {
      *
      * @return 命令全写
      */
-    String respondCommand();
+    String respondCommandString();
+
+    /**
+     * CommandHandler对应响应的命令枚举
+     *
+     * @return 命令全写
+     */
+    CommandEnum respondCommand();
 
 
 }

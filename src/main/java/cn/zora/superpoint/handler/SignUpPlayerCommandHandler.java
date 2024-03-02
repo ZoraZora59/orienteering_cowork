@@ -1,6 +1,6 @@
 package cn.zora.superpoint.handler;
 
-import cn.zora.superpoint.common.Constants;
+import cn.zora.superpoint.common.CommandEnum;
 import cn.zora.superpoint.common.GenderTypeEnum;
 import cn.zora.superpoint.model.superpoint.Player;
 import cn.zora.superpoint.model.wechat.ReceiveMessage;
@@ -44,7 +44,7 @@ public class SignUpPlayerCommandHandler extends AbstractCommandHandler{
      * @return 命令全写
      */
     @Override
-    public String respondCommand() {
-        return Constants.SIGN_UP;
+    public CommandEnum respondCommand() {
+        return CommandEnum.SIGN_UP;
     }
 }

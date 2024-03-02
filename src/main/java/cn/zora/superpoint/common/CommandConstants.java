@@ -1,15 +1,13 @@
 package cn.zora.superpoint.common;
 
 /**
- * Constants
+ * CommandConstants
  *
  * @author 阿左
  * @since 2024/03/01
  */
-public class Constants {
-
-
-
+@Deprecated
+public class CommandConstants {
     public static final String REBOOT="系统重启";
     public static final String REGISTER_FACILITY="注册雪场";
     public static final String REGISTER_TEAM="创建团队";

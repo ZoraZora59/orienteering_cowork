@@ -1,6 +1,6 @@
 package cn.zora.superpoint.controller;
 
-import cn.zora.superpoint.common.Constants;
+import cn.zora.superpoint.common.CommandConstants;
 import cn.zora.superpoint.common.RuleUtils;
 import cn.zora.superpoint.model.wechat.ResponseMessage;
 import cn.zora.superpoint.model.wechat.ReceiveMessage;
@@ -50,7 +50,7 @@ public class MainController {
         log.info("post: {}", request);
         String responseMessage = "收到啦～";
         switch (RuleUtils.getRule(request.getContent())) {
-            case Constants.REBOOT:
+            case CommandConstants.REBOOT:
                 responseMessage = "重启失败，请重试";
                 lock.lock();
                 try {
@@ -63,7 +63,7 @@ public class MainController {
                     lock.unlock();
                 }
                 break;
-            case Constants.SIGN_UP:
+            case CommandConstants.SIGN_UP:
                 log.info("sign up");
                 lock.lock();
                 try {
@@ -72,7 +72,7 @@ public class MainController {
                     lock.unlock();
                 }
                 break;
-            case Constants.ACHIEVE:
+            case CommandConstants.ACHIEVE:
                 log.info("achieve");
                 lock.lock();
                 try {
@@ -81,7 +81,7 @@ public class MainController {
                     lock.unlock();
                 }
                 break;
-            case Constants.CANCEL:
+            case CommandConstants.CANCEL:
                 log.info("cancel");
                 try {
                     responseMessage = cancel(request);
@@ -89,19 +89,19 @@ public class MainController {
                     lock.unlock();
                 }
                 break;
-            case Constants.TEAM_STATE:
+            case CommandConstants.TEAM_STATE:
                 log.info("team state");
                 responseMessage = teamState(request);
                 break;
-            case Constants.TEAM_STATE_DETAIL:
+            case CommandConstants.TEAM_STATE_DETAIL:
                 log.info("team state detail");
                 responseMessage = teamStateDetail(request);
                 break;
-            case Constants.MY_STATE:
+            case CommandConstants.MY_STATE:
                 log.info("my state");
                 responseMessage = myState(request);
                 break;
-            case Constants.CONFIG_NODES:
+            case CommandConstants.CONFIG_NODES:
                 log.info("config nodes");
                 lock.lock();
                 try {
