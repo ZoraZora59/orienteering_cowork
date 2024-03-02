@@ -1,5 +1,6 @@
 package cn.zora.superpoint.model.superpoint;
 
+import cn.zora.superpoint.common.BooleanMysqlEnum;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -21,7 +22,7 @@ public class Team {
     private String name;
 
     @TableField(value = "active")
-    private Object active;
+    private BooleanMysqlEnum active;
 
     @TableField(value = "create_time")
     private LocalDateTime createTime;

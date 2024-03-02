@@ -13,13 +13,28 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 public abstract class AbstractCommandHandler implements ICommandHandler {
+
+    /**
+     * 命令的使用说明
+     *
+     * @return 说明
+     */
+    public abstract String guidance();
+
+    protected abstract boolean argsIsValid(String[] args);
+
     @Override
     public ResponseMessage runCommand(ReceiveMessage message) {
         String responseContent;
         try {
             log.info("执行命令: {}", respondCommandString());
             long start = System.currentTimeMillis();
-            responseContent = handleCommand(message);
+
+            if (!argsIsValid(message.getArgs())) {
+                responseContent = guidance();
+            } else {
+                responseContent = handleCommand(message);
+            }
             log.info("执行命令成功: {}，耗时: {}ms", respondCommandString(), System.currentTimeMillis() - start);
         } catch (Exception e) {
             log.error("执行命令失败", e);
@@ -44,7 +59,7 @@ public abstract class AbstractCommandHandler implements ICommandHandler {
      *
      * @return 命令全写
      */
-    public String respondCommandString(){
+    public String respondCommandString() {
         return respondCommand().getValue();
     }
 

@@ -19,13 +19,26 @@ import javax.annotation.Resource;
 public class SignUpPlayerCommandHandler extends AbstractCommandHandler{
     @Resource
     private PlayerService playerService;
+
+    /**
+     * 命令的使用说明
+     *
+     * @return 说明
+     */
+    @Override
+    public String guidance() {
+        return "需要注册的话，发送的消息内容请参考示例 “报名 阿左 男 13012349876”，" +
+                "其中“阿左”是昵称，“男”是性别，“13012349876”是手机号码\n" +
+                "昵称是必填项，性别和手机号码可以不填，只发送“阿左”也是可以的。";
+    }
+
+    @Override
+    protected boolean argsIsValid(String[] args) {
+        return args.length >= 1;
+    }
+
     @Override
     public String handleCommand(ReceiveMessage message) {
-        if(message.getArgs().length < 1) {
-            return "需要注册的话，发送的消息内容请参考示例 “阿左 男 13012349876”，" +
-                    "其中“阿左”是昵称，“男”是性别，“13012349876”是手机号码\n" +
-                    "昵称是必填项，性别和手机号码可以不填，只发送“阿左”也是可以的。";
-        }
         Player player = new Player();
         player.setWechatUser(message.getFromUserName());
         player.setNickName(message.getArgs()[0]);
