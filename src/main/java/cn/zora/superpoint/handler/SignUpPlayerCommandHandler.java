@@ -20,6 +20,11 @@ public class SignUpPlayerCommandHandler extends AbstractCommandHandler{
     @Resource
     private PlayerService playerService;
 
+    @Override
+    protected boolean needRegisterPlayer(){
+        return false;
+    }
+
     /**
      * 命令的使用说明
      *
